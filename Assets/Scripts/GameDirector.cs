@@ -55,7 +55,7 @@ public class GameDirector : MonoBehaviour
         int i = 0;
         while (i == 0 || i == -5 || i == 5 || ReturnNumImageIndex(i) < 0 || ReturnNumImageIndex(i) >= numImage.Count)
         {
-            i = Mathf.CeilToInt(Random.value * 19.0f) - 9;
+            i = (Mathf.FloorToInt(Mathf.Pow(Random.value, 1.65f) * 9.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
         }
         return i;
     }
