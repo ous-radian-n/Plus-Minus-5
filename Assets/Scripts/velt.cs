@@ -26,7 +26,7 @@ public class velt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        value -= velocity * Time.deltaTime;
+        value -= velocity * Time.deltaTime * (1 + (float)(director.Level - 1) * 0.125f);
         if (value <= 0.0f)
         {
             if (director.EnterNum2Stock(sw.isRight))

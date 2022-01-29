@@ -7,15 +7,18 @@ using UnityEngine.UI;
 public class GameDirector : MonoBehaviour
 {
     [SerializeField]
-    Text scoreText;
+    Text scoreText, levelText;
     [SerializeField]
     List<Sprite> numImage = new List<Sprite>();
 
     [SerializeField]
     velt vl;
 
-    public int Score = 0;
+    public int Score = 0, Level = 1;
     int leftChainNum = 0, rightChainNum = 0;
+
+    [SerializeField]
+    int fiveScore = 200, plusMinusFiveScore = 2000, levelDist = 5000;
 
     int nowNum, nextNum, leftNum = 0, rightNum = 0;
     bool isFirstHolded = false, isHolded = false;
@@ -50,6 +53,8 @@ public class GameDirector : MonoBehaviour
         scoreText.text = Score.ToString();
         if (isFirstHolded)
             holdNumImage.sprite = numImage[ReturnNumImageIndex(holdNum)];
+        Level = Score / levelDist + 1;
+        levelText.text = Level.ToString();
     }
 
     private int ReturnNumImageIndex(int num)
@@ -100,7 +105,7 @@ public class GameDirector : MonoBehaviour
         {
             if (IsPlusMinusFive())
             {
-                Score += 500;
+                Score += plusMinusFiveScore;
                 /* 演出, お邪魔ブロック一掃 */
                 leftNum = ReturnRandomNum();
                 rightNum = ReturnRandomNum();
@@ -109,7 +114,7 @@ public class GameDirector : MonoBehaviour
             {
                 if (IsFive(false))
                 {
-                    Score += 50;
+                    Score += fiveScore;
                     /* 演出, お邪魔ブロックを除去 */
                     leftChainNum++;
                     if (leftChainNum >= 3)
@@ -124,7 +129,7 @@ public class GameDirector : MonoBehaviour
                 }
                 if (IsFive(true))
                 {
-                    Score += 50;
+                    Score += fiveScore;
                     /* 演出, お邪魔ブロックを除去 */
                     rightChainNum++;
                     if (rightChainNum >= 3)

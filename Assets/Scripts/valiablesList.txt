@@ -1,6 +1,8 @@
 /* GameDirector.cs …ゲームの進行などの処理 */
 [SerializeField] Text scoreText;
 // スコアを表示するTextオブジェクト
+[SerializeField] Text levelText;
+// レベルを表示するTextオブジェクト
 [SerializeField] List<Sprite> numImage;
 /* 数字の画像(Sprite)
  * [画像リスト番号] = [数字の値] + 9
@@ -8,10 +10,14 @@
  */
 [SerializeField] velt vl;
 // Sliderの参照
-public int Score = 0;
-// スコア
+public int Score = 0; // スコア
+public int Level = 1; // レベル
 int leftChainNum = 0, rightChainNum = 0;
 // 連鎖数(「±5」が連続で表示している回数：3回連続表示でランダムに変化)
+[SerializeField] int fiveScore = 200, plusMinusFiveScore = 2000;
+// 「±5」を表示した時の得点
+[SerializeField] int levelDist = 5000;
+// レベルアップの条件スコア
 bool isHolded = false; // ホールドされているか
 int nowNum; // 現在流れている数字
 int nextNum; // 次に控えている数字
