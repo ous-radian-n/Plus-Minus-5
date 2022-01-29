@@ -909,6 +909,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806233843}
   m_CullTransparentMesh: 0
+--- !u!1 &836514578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 836514580}
+  - component: {fileID: 836514579}
+  m_Layer: 0
+  m_Name: GameDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &836514579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836514578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2cb56cf9e73be7449ecf9260b2dca82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderNextNumImage: {fileID: 372677921}
+  numImage:
+  - {fileID: 21300000, guid: 4b2b30f1087ddf244b202b3330a3c98c, type: 3}
+  - {fileID: 21300000, guid: f0e34b81c53fd7348b22fef42bbd095d, type: 3}
+  - {fileID: 21300000, guid: e4ff6927d816a67489e245c7e13cc061, type: 3}
+  - {fileID: 21300000, guid: 0ab733d985915aa41ac117e9cd8b8ace, type: 3}
+  - {fileID: 21300000, guid: 123cada6457a63c45be9acc1f5f74348, type: 3}
+  - {fileID: 21300000, guid: dd1cd092ba6aff7428fd51b352f35d93, type: 3}
+  - {fileID: 21300000, guid: 0bae4db43e1369346ac1761bb11d913e, type: 3}
+  - {fileID: 21300000, guid: 41cdcc7b907f6c94dbfe5c9e8dc3a927, type: 3}
+  - {fileID: 21300000, guid: 233997c0ce8bbec4a94028068c3a8c23, type: 3}
+  - {fileID: 21300000, guid: 5acdca65f249101489293c5327538391, type: 3}
+  - {fileID: 21300000, guid: 2513bf0083e5abc499ebeb6b69db6803, type: 3}
+  - {fileID: 21300000, guid: 9cb72f5dc9a099c4680a40f8051f9168, type: 3}
+  - {fileID: 21300000, guid: be049247f5234a94097495f5252fc653, type: 3}
+  - {fileID: 21300000, guid: ae1dce2620c80684ba4018c5472515ab, type: 3}
+  - {fileID: 21300000, guid: b85734d1c9c64764e9bed384691d36aa, type: 3}
+  - {fileID: 21300000, guid: 7eb66ec7f1f0c5749a42def391c8cce8, type: 3}
+  - {fileID: 21300000, guid: 7ee5990d605e2c04a98307af599a755d, type: 3}
+  - {fileID: 21300000, guid: 3dc5b6bafdd22904fa77fc09cf35b9c2, type: 3}
+  - {fileID: 21300000, guid: 144f57f3bbacc814baaba584fdec1103, type: 3}
+  textUI: {fileID: 0}
+  nowNumImage: {fileID: 372677921}
+  nextNumImage: {fileID: 154953566}
+  leftNumImage: {fileID: 1575052016}
+  rightNumImage: {fileID: 1469254539}
+--- !u!4 &836514580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836514578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4431517, y: 1.7749649, z: -0.59167254}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &916014963
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,6 +1023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1049618844}
+  - component: {fileID: 1049618845}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -982,6 +1052,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 350}
   m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1049618845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049618843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4584608ba5c3ca749be33bb81cfd6f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftSwitch: {fileID: 1831043341}
+  rightSwitch: {fileID: 2116305592}
+  isRight: 0
 --- !u!1 &1353274806
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1675519445}
   - component: {fileID: 1675519446}
+  - component: {fileID: 1675519447}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1495,6 +1581,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1675519447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675519444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ff40c2964162d049a308d2095b9f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 836514579}
+  slider: {fileID: 1675519446}
+  time: 0
+  velocity: 0.25
 --- !u!1 &1686416952
 GameObject:
   m_ObjectHideFlags: 0

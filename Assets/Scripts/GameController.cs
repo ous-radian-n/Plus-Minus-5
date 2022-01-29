@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     GameDirector director;
+    [SerializeField]
+    switching sw;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +21,20 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad4) || Input.GetKeyDown(KeyCode.Alpha4) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-
+            sw.Switching(false);
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            sw.Switching(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.DownArrow))
         {
 
         }
