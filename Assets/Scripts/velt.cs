@@ -7,6 +7,8 @@ public class velt : MonoBehaviour
 {
     [SerializeField]
     GameDirector director;
+    [SerializeField]
+    switching sw;
 
     public Slider slider;
     public float time;
@@ -25,7 +27,10 @@ public class velt : MonoBehaviour
         value -= velocity * Time.deltaTime;
         if(value <= 0.0f)
         {
-            /* ストックに送る処理 */
+            if (director.EnterNum2Stock(sw.isRight))
+            {
+                /* ダメージ処理(HP側) */
+            }
 
             director.SwitchNextNum();
             value = 1.00f;
