@@ -12,9 +12,9 @@ public class GameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float speed = 0;
+       // float speed = 0;
 
-    
+
         //int rnd = Random.Range(1, 10);
         //public static int Range(int min, int max);
 
@@ -26,21 +26,9 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            this.speed = 0.2f;
-
-        }
-
-        transform.Translate(this.speed, 0, 0);
-        this.speed *= 0.98f;
-
-
-
-        public float score = 0;
-        public float totalScore  0;
-
-        
 
     }
-}
+        }
+
+
+
