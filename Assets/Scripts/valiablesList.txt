@@ -6,14 +6,18 @@
  * [画像リスト番号] = [数字の値] + 9
  * ReturnNumImageIndex(int)関数で変換できます
  */
+[SerializeField] velt vl;
+// Sliderの参照
 public int Score = 0;
 // スコア
 int leftChainNum = 0, rightChainNum = 0;
 // 連鎖数(「±5」が連続で表示している回数：3回連続表示でランダムに変化)
+bool isHolded = false; // ホールドされているか
 int nowNum; // 現在流れている数字
 int nextNum; // 次に控えている数字
 int leftNum; // 左に表示されている数字
 int rightNum; // 右に表示されている数字
+int holdNum; // ホールドされている数字
 [SerializeField] Image nowNumImage;
 // 現在流れている数字を表示している画像
 [SerializeField] Image nextNumImage;
@@ -22,12 +26,16 @@ int rightNum; // 右に表示されている数字
 // 左で数字を表示している画像
 [SerializeField] Image rightNumImage;
 // 右で数字を表示している画像
+[SerializeField] Image holdNumImage;
+// ホールドした数字を表示している画像
 
 /* GameController.cs …キー入力などの処理 */
 [SerializeField] GameDirector director;
 // ゲームディレクターの参照
 [SerializeField] switching sw;
 // スイッチ(切り替え器)用スクリプトの参照
+[SerializeField] velt vl;
+// Sliderの参照
 
 /* velt.cs …数字を流すSliderの処理 */
 [SerializeField] GameDirector director;

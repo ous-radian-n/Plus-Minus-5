@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     GameDirector director;
     [SerializeField]
     switching sw;
+    [SerializeField]
+    velt vl;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +33,12 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-
+            director.HoldNum();
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-
+            vl.HardDrop();
         }
     }
 }
