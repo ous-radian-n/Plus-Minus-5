@@ -34,6 +34,7 @@ public class velt : MonoBehaviour
                 /* ダメージ処理(HP側) */
                 director.SwitchNextNum();
             }
+            director.TurnOffHoldFlag();
             director.SwitchNextNum();
             value = 1.00f;
         }
@@ -41,5 +42,16 @@ public class velt : MonoBehaviour
         {
             slider.value = Mathf.Ceil(value * (float)steps) / (float)steps;
         }
+    }
+
+    public void ResetValue()
+    {
+        value = 1.00f;
+        slider.value = value;
+    }
+
+    public void HardDrop()
+    {
+        value = -0.10f;
     }
 }

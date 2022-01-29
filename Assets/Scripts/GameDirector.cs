@@ -11,12 +11,17 @@ public class GameDirector : MonoBehaviour
     [SerializeField]
     List<Sprite> numImage = new List<Sprite>();
 
+    [SerializeField]
+    velt vl;
+
     public int Score = 0;
     int leftChainNum = 0, rightChainNum = 0;
 
     int nowNum, nextNum, leftNum = 0, rightNum = 0;
+    bool isFirstHolded = false, isHolded = false;
+    int holdNum = 0;
     [SerializeField]
-    Image nowNumImage, nextNumImage, leftNumImage, rightNumImage;
+    Image nowNumImage, nextNumImage, leftNumImage, rightNumImage, holdNumImage;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +48,8 @@ public class GameDirector : MonoBehaviour
         if (ReturnNumImageIndex(rightNum) >= 0 && ReturnNumImageIndex(rightNum) < numImage.Count)
             rightNumImage.sprite = numImage[ReturnNumImageIndex(rightNum)];
         scoreText.text = Score.ToString();
+        if (isFirstHolded)
+            holdNumImage.sprite = numImage[ReturnNumImageIndex(holdNum)];
     }
 
     private int ReturnNumImageIndex(int num)
@@ -144,6 +151,32 @@ public class GameDirector : MonoBehaviour
     bool IsPlusMinusFive()
     {
         return leftNum * rightNum == -25;
+    }
+
+    public void HoldNum()
+    {
+        if (!isHolded)
+        {
+            int num = 0;
+            if (isFirstHolded) num = holdNum;
+            holdNum = nowNum;
+            if (num == 0 && !isFirstHolded)
+            {
+                SwitchNextNum();
+                isFirstHolded = true;
+            }
+            else
+            {
+                nowNum = num;
+            }
+            vl.ResetValue();
+            isHolded = true;
+        }
+    }
+
+    public void TurnOffHoldFlag()
+    {
+        isHolded = false;
     }
 }
 
