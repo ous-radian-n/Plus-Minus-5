@@ -12,7 +12,7 @@ public class GameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // float speed = 0;
+        // float speed = 0;
 
 
         //int rnd = Random.Range(1, 10);
@@ -26,9 +26,17 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Keypad4)|| Input.GetKeyDown(KeyCode.Alpha4)|| Input.GetKeyDown(KeyCode.LeftArrow))
+        {
 
-    }
         }
+
+        if (Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+
+        }
+    }
+}
 
 
 
