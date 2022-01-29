@@ -26,15 +26,6 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad4)|| Input.GetKeyDown(KeyCode.Alpha4)|| Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-
-        }
-
-        if(Input.GetKeyDown(KeyCode.Keypad6) || Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-
-        }
 
     }
         }
