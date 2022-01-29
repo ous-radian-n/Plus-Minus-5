@@ -35,6 +35,16 @@ public class GameDirector : MonoBehaviour
         {
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Keypad8) || Input.GetKeyDown(KeyCode.Alpha8) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad5) || Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+
+        }
     }
 }
 
