@@ -21,6 +21,12 @@ public class GameDirector : MonoBehaviour
     [SerializeField]
     int fiveScore = 200, plusMinusFiveScore = 2000, levelDist = 5000;
 
+    [SerializeField]
+    float[] random_Num;
+
+    [SerializeField]
+    GameObject[] bubble_Prefab;
+
     int nowNum, nextNum, leftNum = 0, rightNum = 0;
     bool isFirstHolded = false, isHolded = false;
     int holdNum = 0;
@@ -123,6 +129,7 @@ public class GameDirector : MonoBehaviour
                 /* 演出, お邪魔ブロック一掃 */
                 leftNum = ReturnRandomNum();
                 rightNum = ReturnRandomNum();
+                //赤青全消し
             }
             else
             {
