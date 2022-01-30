@@ -19,7 +19,7 @@ public class GameDirector : MonoBehaviour
     int leftChainNum = 0, rightChainNum = 0;
 
     [SerializeField]
-    int fiveScore = 200, plusMinusFiveScore = 2000, levelDist = 5000;
+    int fiveScore = 200, plusMinusFiveScore = 2000, levelDist = 5000, bubbleScore = 50;
 
     [SerializeField]
     float random_Num;//大きさ
@@ -74,7 +74,8 @@ public class GameDirector : MonoBehaviour
         else
         {
             /* ゲームオーバー(リザルト画面へ) */
-            //SceneManager.LoadScene(resultSceneName);
+            ScoreManager.instance.ScoreMessage = Score;
+            SceneManager.LoadScene(resultSceneName);
         }
     }
 
@@ -129,7 +130,10 @@ public class GameDirector : MonoBehaviour
                 if (IsPlusMinusFive())
                 {
                     Score += plusMinusFiveScore;
-                    /* バブル一掃 */
+
+                    deleteBubblesAll(true);
+                            deleteBubblesAll(false);
+
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
                     //赤青全消し
@@ -147,11 +151,11 @@ public class GameDirector : MonoBehaviour
                         }
                         if (leftNum == 5)
                         {
-                            /* 赤いバブルを一掃 */
+                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            /* 青いバブルを一掃 */
+                            deleteBubblesAll(false);
                         }
                     }
                     else
@@ -169,11 +173,11 @@ public class GameDirector : MonoBehaviour
                         }
                         if (rightNum == 5)
                         {
-                            /* 赤いバブルを一掃 */
+                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            /* 青いバブルを一掃 */
+                            deleteBubblesAll(false);
                         }
                     }
                     else
@@ -265,6 +269,34 @@ public class GameDirector : MonoBehaviour
             }
         }
         isBubbling = false;
+    }
+
+    void deleteBubblesAll(bool isPlus)
+    {
+        if (isPlus)
+        {
+            var plusBubble = GameObject.FindGameObjectsWithTag("PlusBubble");
+            if (plusBubble.Length > 0)
+            {
+                Score += bubbleScore * plusBubble.Length;
+                for (int i = 0; i < plusBubble.Length; ++i)
+                {
+                    GameObject.Destroy(plusBubble[i]);
+                }
+            }
+        }
+        else
+        {
+            var minusBubble = GameObject.FindGameObjectsWithTag("MinusBubble");
+            if (minusBubble.Length > 0)
+            {
+                Score += bubbleScore * minusBubble.Length;
+                for (int i = 0; i < minusBubble.Length; ++i)
+                {
+                    GameObject.Destroy(minusBubble[i]);
+                }
+            }
+        }
     }
 
     public void TurnOnBubblingFlag()
