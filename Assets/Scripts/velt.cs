@@ -30,17 +30,17 @@ public class velt : MonoBehaviour
         value -= velocity * Time.deltaTime * (1 + (float)(director.Level - 1) * 0.125f);
         if (value <= 0.0f)
         {
-            if (director.EnterNum2Stock(sw.isRight))
+            if (director.ReturnStockingFlag())
             {
-                /* ダメージ処理(HP側) */
+                director.EnterNum2Stock(sw.isRight);
+                director.TurnOffHoldFlag();
                 director.SwitchNextNum();
+                value = ReturnMaxValue();
             }
-            director.TurnOffHoldFlag();
-            director.SwitchNextNum();
-            value = ReturnMaxValue();
         }
         else
         {
+            director.TurnOnBubblingFlag();
             slider.value = Mathf.Floor(value * (float)steps) / (float)steps;
         }
     }

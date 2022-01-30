@@ -22,10 +22,13 @@ public class GameDirector : MonoBehaviour
     int fiveScore = 200, plusMinusFiveScore = 2000, levelDist = 5000;
 
     [SerializeField]
-    float[] random_Num;
+    float random_Num;//大きさ
 
     [SerializeField]
     GameObject[] bubble_Prefab;
+    
+    int random_Unit;//個数
+    bool isBubbling = true;
 
     int nowNum, nextNum, leftNum = 0, rightNum = 0;
     bool isFirstHolded = false, isHolded = false;
@@ -96,99 +99,101 @@ public class GameDirector : MonoBehaviour
         nextNum = ReturnRandomNum();
     }
 
-    public bool EnterNum2Stock(bool isRight)
+    public void EnterNum2Stock(bool isRight)
     {
-        bool isBurst = false;
-        if (!isRight)
+        if (isBubbling)
         {
-            leftNum += nowNum;
-            if (leftNum * leftNum >= 100)
+            bool isBurst = false;
+            if (!isRight)
             {
-                /* 大ダメージ処理(表示演出) */
-                leftNum = ReturnRandomNum();
-                isBurst = true;
-            }
-        }
-        else
-        {
-            rightNum += nowNum;
-            if (rightNum * rightNum >= 100)
-            {
-                /* 大ダメージ処理(表示演出) */
-                rightNum = ReturnRandomNum();
-                isBurst = true;
-            }
-        }
-        if (!isBurst)
-        {
-            if (IsPlusMinusFive())
-            {
-                Score += plusMinusFiveScore;
-                /* バブル一掃 */
-                leftNum = ReturnRandomNum();
-                rightNum = ReturnRandomNum();
-                //赤青全消し
-            }
-            else if(IsFive())
-            {
-                if (IsFive(true, false))
+                leftNum += nowNum;
+                if (leftNum * leftNum >= 100)
                 {
-                    Score += fiveScore;
-                    leftChainNum++;
-                    if (leftChainNum >= 3)
-                    {
-                        leftChainNum = 0;
-                        leftNum = ReturnRandomNum();
-                    }
-                    if(leftNum == 5)
-                    {
-                        /* 赤いバブルを一掃 */
-                    }
-                    else
-                    {
-                        /* 青いバブルを一掃 */
-                    }
-                }
-                else
-                {
-                    leftChainNum = 0;
-                }
-                if (IsFive(true, true))
-                {
-                    Score += fiveScore;
-                    rightChainNum++;
-                    if (rightChainNum >= 3)
-                    {
-                        rightChainNum = 0;
-                        rightNum = ReturnRandomNum();
-                    }
-                    if (rightNum == 5)
-                    {
-                        /* 赤いバブルを一掃 */
-                    }
-                    else
-                    {
-                        /* 青いバブルを一掃 */
-                    }
-                }
-                else
-                {
-                    rightChainNum = 0;
+                    bubbleCloning(true, true);
+                    leftNum = ReturnRandomNum();
+                    isBurst = true;
                 }
             }
             else
             {
-                if(nowNum > 0)
+                rightNum += nowNum;
+                if (rightNum * rightNum >= 100)
                 {
-                    /* 赤いバブルを追加 */
+                    bubbleCloning(true, true);
+                    rightNum = ReturnRandomNum();
+                    isBurst = true;
                 }
-                else if(nowNum < 0)
+            }
+            if (!isBurst)
+            {
+                if (IsPlusMinusFive())
                 {
-                    /* 青いバブルを追加 */
+                    Score += plusMinusFiveScore;
+                    /* バブル一掃 */
+                    leftNum = ReturnRandomNum();
+                    rightNum = ReturnRandomNum();
+                    //赤青全消し
+                }
+                else if (IsFive())
+                {
+                    if (IsFive(true, false))
+                    {
+                        Score += fiveScore;
+                        leftChainNum++;
+                        if (leftChainNum >= 3)
+                        {
+                            leftChainNum = 0;
+                            leftNum = ReturnRandomNum();
+                        }
+                        if (leftNum == 5)
+                        {
+                            /* 赤いバブルを一掃 */
+                        }
+                        else
+                        {
+                            /* 青いバブルを一掃 */
+                        }
+                    }
+                    else
+                    {
+                        leftChainNum = 0;
+                    }
+                    if (IsFive(true, true))
+                    {
+                        Score += fiveScore;
+                        rightChainNum++;
+                        if (rightChainNum >= 3)
+                        {
+                            rightChainNum = 0;
+                            rightNum = ReturnRandomNum();
+                        }
+                        if (rightNum == 5)
+                        {
+                            /* 赤いバブルを一掃 */
+                        }
+                        else
+                        {
+                            /* 青いバブルを一掃 */
+                        }
+                    }
+                    else
+                    {
+                        rightChainNum = 0;
+                    }
+                }
+                else
+                {
+                    if (nowNum > 0)
+                    {
+                        bubbleCloning(true);
+                    }
+                    else if (nowNum < 0)
+                    {
+                        bubbleCloning(false);
+                    }
                 }
             }
         }
-        return isBurst;
     }
 
     bool IsFive(bool selection = false, bool isRight = false)
@@ -234,6 +239,42 @@ public class GameDirector : MonoBehaviour
     public void SwitchGameOver()
     {
         isGameOver = true;
+    }
+
+    void bubbleCloning(bool isPlus, bool isBursted = false)
+    {
+        random_Num = Random.Range(1.0f, 3.1f);
+        random_Unit = Random.Range(1, 4);
+        if (isBursted) random_Unit = 5;
+        Debug.Log(random_Num.ToString("f0"));
+        Debug.Log(random_Unit.ToString());
+        GameObject[] obj = new GameObject[random_Unit];
+        for (int i = 0; i < random_Unit; i++)
+        {
+            if (isPlus || isBursted)
+            {
+                obj[i] = Instantiate(bubble_Prefab[0],
+                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                //break;
+            }
+            if (!isPlus || isBursted)
+            {
+                obj[i] = Instantiate(bubble_Prefab[1],
+                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                //break;
+            }
+        }
+        isBubbling = false;
+    }
+
+    public void TurnOnBubblingFlag()
+    {
+        isBubbling = true;
+    }
+
+    public bool ReturnStockingFlag()
+    {
+        return isBubbling;
     }
 }
 
