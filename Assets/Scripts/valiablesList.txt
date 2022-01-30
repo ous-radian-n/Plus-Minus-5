@@ -34,6 +34,8 @@ int holdNum; // ホールドされている数字
 // 右で数字を表示している画像
 [SerializeField] Image holdNumImage;
 // ホールドした数字を表示している画像
+bool isGameOver = false; // ゲームオーバーフラグ
+[SerializeField] string resultSceneName; // リザルト画面のシーン名
 
 /* GameController.cs …キー入力などの処理 */
 [SerializeField] GameDirector director;
