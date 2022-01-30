@@ -96,7 +96,6 @@ public class GameDirector : MonoBehaviour
         if (!isRight)
         {
             leftNum += nowNum;
-            /* 小ダメージ処理(表示演出) */
             if (leftNum * leftNum >= 100)
             {
                 /* 大ダメージ処理(表示演出) */
@@ -107,7 +106,6 @@ public class GameDirector : MonoBehaviour
         else
         {
             rightNum += nowNum;
-            /* 小ダメージ処理(表示演出) */
             if (rightNum * rightNum >= 100)
             {
                 /* 大ダメージ処理(表示演出) */
@@ -120,36 +118,50 @@ public class GameDirector : MonoBehaviour
             if (IsPlusMinusFive())
             {
                 Score += plusMinusFiveScore;
-                /* 演出, お邪魔ブロック一掃 */
+                /* バブル一掃 */
                 leftNum = ReturnRandomNum();
                 rightNum = ReturnRandomNum();
             }
-            else
+            else if(IsFive())
             {
-                if (IsFive(false))
+                if (IsFive(true, false))
                 {
                     Score += fiveScore;
-                    /* 演出, お邪魔ブロックを除去 */
                     leftChainNum++;
                     if (leftChainNum >= 3)
                     {
                         leftChainNum = 0;
                         leftNum = ReturnRandomNum();
                     }
+                    if(leftNum == 5)
+                    {
+                        /* 赤いバブルを一掃 */
+                    }
+                    else
+                    {
+                        /* 青いバブルを一掃 */
+                    }
                 }
                 else
                 {
                     leftChainNum = 0;
                 }
-                if (IsFive(true))
+                if (IsFive(true, true))
                 {
                     Score += fiveScore;
-                    /* 演出, お邪魔ブロックを除去 */
                     rightChainNum++;
                     if (rightChainNum >= 3)
                     {
                         rightChainNum = 0;
                         rightNum = ReturnRandomNum();
+                    }
+                    if (rightNum == 5)
+                    {
+                        /* 赤いバブルを一掃 */
+                    }
+                    else
+                    {
+                        /* 青いバブルを一掃 */
                     }
                 }
                 else
@@ -157,14 +169,28 @@ public class GameDirector : MonoBehaviour
                     rightChainNum = 0;
                 }
             }
+            else
+            {
+                if(nowNum > 0)
+                {
+                    /* 赤いバブルを追加 */
+                }
+                else if(nowNum < 0)
+                {
+                    /* 青いバブルを追加 */
+                }
+            }
         }
         return isBurst;
     }
 
-    bool IsFive(bool isRight)
+    bool IsFive(bool selection = false, bool isRight = false)
     {
-        if (!isRight) return leftNum * leftNum == 25;
-        else return rightNum * rightNum == 25;
+        if (selection) {
+            if (!isRight) return leftNum * leftNum == 25;
+            else return rightNum * rightNum == 25;
+        }
+        return (leftNum * leftNum == 25) || (rightNum * rightNum == 25);
     }
 
     bool IsPlusMinusFive()
