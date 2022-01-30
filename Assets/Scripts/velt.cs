@@ -21,6 +21,7 @@ public class velt : MonoBehaviour
     void Start()
     {
         slider = this.GetComponent<Slider>();
+        value = ReturnMaxValue();
     }
 
     // Update is called once per frame
@@ -36,17 +37,22 @@ public class velt : MonoBehaviour
             }
             director.TurnOffHoldFlag();
             director.SwitchNextNum();
-            value = 1.00f;
+            value = ReturnMaxValue();
         }
         else
         {
-            slider.value = Mathf.Ceil(value * (float)steps) / (float)steps;
+            slider.value = Mathf.Floor(value * (float)steps) / (float)steps;
         }
+    }
+
+    float ReturnMaxValue()
+    {
+        return 1.00f + 1.00f / (float)steps - Mathf.Epsilon;
     }
 
     public void ResetValue()
     {
-        value = 1.00f;
+        value = ReturnMaxValue();
         slider.value = value;
     }
 
