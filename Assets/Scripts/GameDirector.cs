@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameDirector : MonoBehaviour
@@ -26,6 +27,10 @@ public class GameDirector : MonoBehaviour
     [SerializeField]
     Image nowNumImage, nextNumImage, leftNumImage, rightNumImage, holdNumImage;
 
+    bool isGameOver = false;
+    [SerializeField]
+    string resultSceneName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,17 +49,24 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nowNumImage.sprite = numImage[ReturnNumImageIndex(nowNum)];
-        nextNumImage.sprite = numImage[ReturnNumImageIndex(nextNum)];
-        if (ReturnNumImageIndex(leftNum) >= 0 && ReturnNumImageIndex(leftNum) < numImage.Count)
-            leftNumImage.sprite = numImage[ReturnNumImageIndex(leftNum)];
-        if (ReturnNumImageIndex(rightNum) >= 0 && ReturnNumImageIndex(rightNum) < numImage.Count)
-            rightNumImage.sprite = numImage[ReturnNumImageIndex(rightNum)];
-        scoreText.text = Score.ToString();
-        if (isFirstHolded)
-            holdNumImage.sprite = numImage[ReturnNumImageIndex(holdNum)];
-        Level = Score / levelDist + 1;
-        levelText.text = Level.ToString();
+        if(!isGameOver) {
+            nowNumImage.sprite = numImage[ReturnNumImageIndex(nowNum)];
+            nextNumImage.sprite = numImage[ReturnNumImageIndex(nextNum)];
+            if (ReturnNumImageIndex(leftNum) >= 0 && ReturnNumImageIndex(leftNum) < numImage.Count)
+                leftNumImage.sprite = numImage[ReturnNumImageIndex(leftNum)];
+            if (ReturnNumImageIndex(rightNum) >= 0 && ReturnNumImageIndex(rightNum) < numImage.Count)
+                rightNumImage.sprite = numImage[ReturnNumImageIndex(rightNum)];
+            scoreText.text = Score.ToString();
+            if (isFirstHolded)
+                holdNumImage.sprite = numImage[ReturnNumImageIndex(holdNum)];
+            Level = Score / levelDist + 1;
+            levelText.text = Level.ToString();
+        }
+        else
+        {
+            /* ゲームオーバー(リザルト画面へ) */
+            //SceneManager.LoadScene(resultSceneName);
+        }
     }
 
     private int ReturnNumImageIndex(int num)
@@ -84,9 +96,10 @@ public class GameDirector : MonoBehaviour
         if (!isRight)
         {
             leftNum += nowNum;
-            if(leftNum * leftNum >= 100)
+            /* 小ダメージ処理(表示演出) */
+            if (leftNum * leftNum >= 100)
             {
-                /* ダメージ処理(表示演出) */
+                /* 大ダメージ処理(表示演出) */
                 leftNum = ReturnRandomNum();
                 isBurst = true;
             }
@@ -94,9 +107,10 @@ public class GameDirector : MonoBehaviour
         else
         {
             rightNum += nowNum;
+            /* 小ダメージ処理(表示演出) */
             if (rightNum * rightNum >= 100)
             {
-                /* ダメージ処理(表示演出) */
+                /* 大ダメージ処理(表示演出) */
                 rightNum = ReturnRandomNum();
                 isBurst = true;
             }
@@ -182,6 +196,11 @@ public class GameDirector : MonoBehaviour
     public void TurnOffHoldFlag()
     {
         isHolded = false;
+    }
+
+    public void SwitchGameOver()
+    {
+        isGameOver = true;
     }
 }
 
