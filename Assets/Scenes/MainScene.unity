@@ -1238,6 +1238,7 @@ MonoBehaviour:
   leftNumImage: {fileID: 1575052016}
   rightNumImage: {fileID: 1469254539}
   holdNumImage: {fileID: 748731774}
+  resultSceneName: ResultScene
 --- !u!4 &836514580
 Transform:
   m_ObjectHideFlags: 0
