@@ -64,3 +64,6 @@ float value = 1.00f;
 // 右に切り替えたときに表示するオブジェクト
 public bool isRight = false;
 // 右に切り替えているかどうか（false：左, true：右）
+
+/* SceneSwitcher.cs …タイトル/リザルト画面でシーン切り替えを行う処理 */
+[SerializeField] string nextSceneName; // 次の画面のシーン名
