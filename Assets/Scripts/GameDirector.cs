@@ -282,22 +282,29 @@ public class GameDirector : MonoBehaviour
         if (isBursted) random_Unit = 5;
         // Debug.Log(random_Unit.ToString());
         GameObject[] obj = new GameObject[random_Unit];
+        float angleAnp = 40.0f;
+        float positionXAnp = 2.0f, positionY = 6.0f;
+        float speed = 3.0f;
         for (int i = 0; i < random_Unit; i++)
         {
             random_Num = Random.Range(1.25f, 3.0f + Mathf.Epsilon);
+            float random_x = Mathf.Sin(Random.Range(0.0f, angleAnp) * Mathf.Deg2Rad * Mathf.Sign((float)(2 * Random.Range(0, 2) - 1)));
+            float random_y = Mathf.Cos(Random.Range(0.0f, angleAnp) * Mathf.Deg2Rad);
             // Debug.Log(random_Num.ToString("f0"));
             if (isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[0],
-                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-positionXAnp, positionXAnp), positionY, 0.0f), Quaternion.identity);
                 obj[i].transform.localScale = random_Num * new Vector3(1.0f, 1.0f, 1.0f);
+                obj[i].GetComponent<Rigidbody2D>().velocity = speed * new Vector2(random_x, random_y);
                 //break;
             }
             if (!isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[1],
-                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-positionXAnp, positionXAnp), positionY, 0.0f), Quaternion.identity);
                 obj[i].transform.localScale = random_Num * new Vector3(1.0f, 1.0f, 1.0f);
+                obj[i].GetComponent<Rigidbody2D>().velocity = speed * new Vector2(random_x, random_y);
                 //break;
             }
         }
