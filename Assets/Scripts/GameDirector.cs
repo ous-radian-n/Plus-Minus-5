@@ -272,24 +272,26 @@ public class GameDirector : MonoBehaviour
 
     void bubbleCloning(bool isPlus, bool isBursted = false)
     {
-        random_Num = Random.Range(1.0f, 3.1f);
-        random_Unit = Random.Range(1, 4);
+        random_Unit = Random.Range(3, 6);
         if (isBursted) random_Unit = 5;
-        Debug.Log(random_Num.ToString("f0"));
-        Debug.Log(random_Unit.ToString());
+        // Debug.Log(random_Unit.ToString());
         GameObject[] obj = new GameObject[random_Unit];
         for (int i = 0; i < random_Unit; i++)
         {
+            random_Num = Random.Range(1.25f, 3.0f + Mathf.Epsilon);
+            // Debug.Log(random_Num.ToString("f0"));
             if (isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[0],
                     new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
+                obj[i].transform.localScale = random_Num * new Vector3(1.0f, 1.0f, 1.0f);
                 //break;
             }
             if (!isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[1],
                     new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
+                obj[i].transform.localScale = random_Num * new Vector3(1.0f, 1.0f, 1.0f);
                 //break;
             }
         }
