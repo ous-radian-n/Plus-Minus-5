@@ -36,9 +36,15 @@ public class GameDirector : MonoBehaviour
     [SerializeField]
     Image nowNumImage, nextNumImage, leftNumImage, rightNumImage, holdNumImage;
 
+    [SerializeField]
+    Sprite plusBubbleImage, minusBubbleImage;
+
     bool isGameOver = false;
     [SerializeField]
     string resultSceneName;
+
+    const string PLUS_BUBBLE_TAG = "PlusBubble";
+    const string MINUS_BUBBLE_TAG = "MinusBubble";
 
     // Start is called before the first frame update
     void Start()
@@ -142,8 +148,8 @@ public class GameDirector : MonoBehaviour
                     Score += plusMinusFiveScore;
 
                     /* 「±5」エフェクト */
-                    deleteBubblesAll(true);
-                    deleteBubblesAll(false);
+                    deleteBubblesAll(true, true);
+                    deleteBubblesAll(false, true);
 
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
@@ -298,11 +304,11 @@ public class GameDirector : MonoBehaviour
         isBubbling = false;
     }
 
-    void deleteBubblesAll(bool isPlus)
+    void deleteBubblesAll(bool isPlus, bool isPlusMinus = false)
     {
         if (isPlus)
         {
-            var plusBubble = GameObject.FindGameObjectsWithTag("PlusBubble");
+            var plusBubble = GameObject.FindGameObjectsWithTag(PLUS_BUBBLE_TAG);
             if (plusBubble.Length > 0)
             {
                 Score += bubbleScore * plusBubble.Length;
@@ -314,7 +320,7 @@ public class GameDirector : MonoBehaviour
         }
         else
         {
-            var minusBubble = GameObject.FindGameObjectsWithTag("MinusBubble");
+            var minusBubble = GameObject.FindGameObjectsWithTag(MINUS_BUBBLE_TAG);
             if (minusBubble.Length > 0)
             {
                 Score += bubbleScore * minusBubble.Length;
@@ -323,6 +329,45 @@ public class GameDirector : MonoBehaviour
                     GameObject.Destroy(minusBubble[i]);
                 }
             }
+        }
+        if(!isPlusMinus) ChangeBubblesHalf(isPlus);
+    }
+
+    void ChangeBubblesHalf(bool isPlus)
+    {
+        if (isPlus)
+        {
+            var Bubble = GameObject.FindGameObjectsWithTag(MINUS_BUBBLE_TAG);
+            if (Bubble.Length > 0)
+            {
+                int halfBubbleLength = Bubble.Length / 2;
+                for (int i = 0; i < halfBubbleLength; ++i)
+                {
+                    ChangeBubble(Bubble[i], isPlus);
+                }
+            }
+        }
+        else
+        {
+            var Bubble = GameObject.FindGameObjectsWithTag(PLUS_BUBBLE_TAG);
+            if (Bubble.Length > 0)
+            {
+                int halfBubbleLength = Bubble.Length / 2;
+                for (int i = 0; i < halfBubbleLength; ++i)
+                {
+                    ChangeBubble(Bubble[i], isPlus);
+                }
+            }
+        }
+    }
+
+    void ChangeBubble(GameObject bubbleObject, bool isPlus)
+    {
+        if (bubbleObject)
+        {
+            bubbleObject.GetComponent<SpriteRenderer>().sprite
+                = isPlus ? plusBubbleImage : minusBubbleImage;
+            bubbleObject.tag = isPlus ? PLUS_BUBBLE_TAG : MINUS_BUBBLE_TAG;
         }
     }
 

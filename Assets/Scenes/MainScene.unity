@@ -1375,6 +1375,8 @@ MonoBehaviour:
   leftNumImage: {fileID: 1575052016}
   rightNumImage: {fileID: 1469254539}
   holdNumImage: {fileID: 748731774}
+  plusBubbleImage: {fileID: 21300000, guid: 946a962ebc1982841adaead658a8858c, type: 3}
+  minusBubbleImage: {fileID: 21300000, guid: 61625f8e4ac76df408c559433f91872f, type: 3}
   resultSceneName: ResultScene
 --- !u!4 &836514580
 Transform:
@@ -1580,6 +1582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreMessage: 0
+  LevelMessage: 1
 --- !u!4 &966223607
 Transform:
   m_ObjectHideFlags: 0
