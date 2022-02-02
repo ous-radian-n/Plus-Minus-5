@@ -110,6 +110,7 @@ public class GameDirector : MonoBehaviour
                 leftNum += nowNum;
                 if (leftNum * leftNum >= 100)
                 {
+                    /* ダメージエフェクト */
                     bubbleCloning(true, true);
                     leftNum = ReturnRandomNum();
                     isBurst = true;
@@ -120,6 +121,7 @@ public class GameDirector : MonoBehaviour
                 rightNum += nowNum;
                 if (rightNum * rightNum >= 100)
                 {
+                    /* ダメージエフェクト */
                     bubbleCloning(true, true);
                     rightNum = ReturnRandomNum();
                     isBurst = true;
@@ -131,12 +133,12 @@ public class GameDirector : MonoBehaviour
                 {
                     Score += plusMinusFiveScore;
 
+                    /* 「±5」エフェクト */
                     deleteBubblesAll(true);
-                            deleteBubblesAll(false);
+                    deleteBubblesAll(false);
 
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
-                    //赤青全消し
                 }
                 else if (IsFive())
                 {
@@ -147,15 +149,20 @@ public class GameDirector : MonoBehaviour
                         if (leftChainNum >= 3)
                         {
                             leftChainNum = 0;
+                            /* 連鎖終了エフェクト */
                             leftNum = ReturnRandomNum();
-                        }
-                        if (leftNum == 5)
-                        {
-                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            deleteBubblesAll(false);
+                            /* バブル一掃エフェクト */
+                            if (leftNum == 5)
+                            {
+                                deleteBubblesAll(true);
+                            }
+                            else
+                            {
+                                deleteBubblesAll(false);
+                            }
                         }
                     }
                     else
@@ -169,15 +176,20 @@ public class GameDirector : MonoBehaviour
                         if (rightChainNum >= 3)
                         {
                             rightChainNum = 0;
+                            /* 連鎖終了エフェクト */
                             rightNum = ReturnRandomNum();
-                        }
-                        if (rightNum == 5)
-                        {
-                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            deleteBubblesAll(false);
+                            /* バブル一掃エフェクト */
+                            if (rightNum == 5)
+                            {
+                                deleteBubblesAll(true);
+                            }
+                            else
+                            {
+                                deleteBubblesAll(false);
+                            }
                         }
                     }
                     else
