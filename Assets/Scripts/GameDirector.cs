@@ -89,7 +89,14 @@ public class GameDirector : MonoBehaviour
         int i = 0;
         while (i == 0 || i == -5 || i == 5 || ReturnNumImageIndex(i) < 0 || ReturnNumImageIndex(i) >= numImage.Count)
         {
-            i = (Mathf.FloorToInt(Mathf.Pow(Random.value, 1.85f) * 9.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            if (Level <= 3)
+            {
+                i = (Mathf.FloorToInt(Mathf.Pow(Random.value, 2.5f) * 4.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            }
+            else
+            {
+                i = (Mathf.FloorToInt(Mathf.Pow(Random.value, (float)(6 + Level) / (float)Level) * 9.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            }
         }
         return i;
     }
@@ -202,6 +209,8 @@ public class GameDirector : MonoBehaviour
                 }
                 else
                 {
+                    leftChainNum = 0;
+                    rightChainNum = 0;
                     if (nowNum > 0)
                     {
                         bubbleCloning(true);
