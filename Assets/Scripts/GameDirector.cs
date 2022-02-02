@@ -150,12 +150,13 @@ public class GameDirector : MonoBehaviour
                     /* 「±5」エフェクト */
                     deleteBubblesAll(true, true);
                     deleteBubblesAll(false, true);
-
+                    /*
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
 
                     leftChainNum = 0;
                     rightChainNum = 0;
+                    */
                 }
                 else if (IsFive())
                 {
