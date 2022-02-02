@@ -270,13 +270,13 @@ public class GameDirector : MonoBehaviour
             if (isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[0],
-                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
                 //break;
             }
             if (!isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[1],
-                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
                 //break;
             }
         }
