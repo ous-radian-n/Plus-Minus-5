@@ -139,6 +139,9 @@ public class GameDirector : MonoBehaviour
 
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
+
+                    leftChainNum = 0;
+                    rightChainNum = 0;
                 }
                 else if (IsFive())
                 {
