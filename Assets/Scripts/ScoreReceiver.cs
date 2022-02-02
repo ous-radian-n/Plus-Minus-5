@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class ScoreReceiver : MonoBehaviour
 {
-    int score = 0;
+    int score = 0, level = 1;
     [SerializeField]
-    Text scoreText;
+    Text scoreText, levelText;
     // Start is called before the first frame update
     void Start()
     {
         score = ScoreManager.instance.ScoreMessage;
+        level = ScoreManager.instance.LevelMessage;
         scoreText.text = score.ToString();
+        levelText.text = level.ToString();
     }
 
     // Update is called once per frame
