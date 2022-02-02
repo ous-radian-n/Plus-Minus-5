@@ -89,7 +89,14 @@ public class GameDirector : MonoBehaviour
         int i = 0;
         while (i == 0 || i == -5 || i == 5 || ReturnNumImageIndex(i) < 0 || ReturnNumImageIndex(i) >= numImage.Count)
         {
-            i = (Mathf.FloorToInt(Mathf.Pow(Random.value, 1.85f) * 9.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            if (Level <= 3)
+            {
+                i = (Mathf.FloorToInt(Mathf.Pow(Random.value, 2.5f) * 4.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            }
+            else
+            {
+                i = (Mathf.FloorToInt(Mathf.Pow(Random.value, (float)(6 + Level) / (float)Level) * 9.0f) + 1) * Mathf.CeilToInt(Mathf.Sign(Random.value - 0.5f));
+            }
         }
         return i;
     }
@@ -110,6 +117,7 @@ public class GameDirector : MonoBehaviour
                 leftNum += nowNum;
                 if (leftNum * leftNum >= 100)
                 {
+                    /* ダメージエフェクト */
                     bubbleCloning(true, true);
                     leftNum = ReturnRandomNum();
                     isBurst = true;
@@ -120,6 +128,7 @@ public class GameDirector : MonoBehaviour
                 rightNum += nowNum;
                 if (rightNum * rightNum >= 100)
                 {
+                    /* ダメージエフェクト */
                     bubbleCloning(true, true);
                     rightNum = ReturnRandomNum();
                     isBurst = true;
@@ -131,12 +140,15 @@ public class GameDirector : MonoBehaviour
                 {
                     Score += plusMinusFiveScore;
 
+                    /* 「±5」エフェクト */
                     deleteBubblesAll(true);
-                            deleteBubblesAll(false);
+                    deleteBubblesAll(false);
 
                     leftNum = ReturnRandomNum();
                     rightNum = ReturnRandomNum();
-                    //赤青全消し
+
+                    leftChainNum = 0;
+                    rightChainNum = 0;
                 }
                 else if (IsFive())
                 {
@@ -147,15 +159,20 @@ public class GameDirector : MonoBehaviour
                         if (leftChainNum >= 3)
                         {
                             leftChainNum = 0;
+                            /* 連鎖終了エフェクト */
                             leftNum = ReturnRandomNum();
-                        }
-                        if (leftNum == 5)
-                        {
-                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            deleteBubblesAll(false);
+                            /* バブル一掃エフェクト */
+                            if (leftNum == 5)
+                            {
+                                deleteBubblesAll(true);
+                            }
+                            else
+                            {
+                                deleteBubblesAll(false);
+                            }
                         }
                     }
                     else
@@ -169,15 +186,20 @@ public class GameDirector : MonoBehaviour
                         if (rightChainNum >= 3)
                         {
                             rightChainNum = 0;
+                            /* 連鎖終了エフェクト */
                             rightNum = ReturnRandomNum();
-                        }
-                        if (rightNum == 5)
-                        {
-                            deleteBubblesAll(true);
                         }
                         else
                         {
-                            deleteBubblesAll(false);
+                            /* バブル一掃エフェクト */
+                            if (rightNum == 5)
+                            {
+                                deleteBubblesAll(true);
+                            }
+                            else
+                            {
+                                deleteBubblesAll(false);
+                            }
                         }
                     }
                     else
@@ -187,6 +209,8 @@ public class GameDirector : MonoBehaviour
                 }
                 else
                 {
+                    leftChainNum = 0;
+                    rightChainNum = 0;
                     if (nowNum > 0)
                     {
                         bubbleCloning(true);
@@ -258,13 +282,13 @@ public class GameDirector : MonoBehaviour
             if (isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[0],
-                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
                 //break;
             }
             if (!isPlus || isBursted)
             {
                 obj[i] = Instantiate(bubble_Prefab[1],
-                    new Vector3(Random.Range(-1.0f, 1.0f), 1.0f, 0.0f), Quaternion.identity);
+                    new Vector3(Random.Range(-2.0f, 2.0f), 6.0f, 0.0f), Quaternion.identity);
                 //break;
             }
         }
