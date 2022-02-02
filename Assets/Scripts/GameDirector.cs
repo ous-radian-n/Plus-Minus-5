@@ -75,6 +75,7 @@ public class GameDirector : MonoBehaviour
         {
             /* ゲームオーバー(リザルト画面へ) */
             ScoreManager.instance.ScoreMessage = Score;
+            ScoreManager.instance.LevelMessage = Level;
             SceneManager.LoadScene(resultSceneName);
         }
     }

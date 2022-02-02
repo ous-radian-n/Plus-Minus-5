@@ -20,6 +20,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     public int ScoreMessage = 0;
+    public int LevelMessage = 1;
 
     // Start is called before the first frame update
     void Start()
